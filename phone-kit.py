@@ -229,7 +229,7 @@ country_codes = {
 
 
 def print_banner():
-    banner = pyfiglet.figlet_format("PhoneGen", font="slant")
+    banner = pyfiglet.figlet_format("PhoneKit", font="slant")
     print("\033[96m" + banner + "\033[0m")
     print("\033[93m  Phone Number Generator & Validator\033[0m")
     print("\033[90m  Generate random phone numbers, validate them,\033[0m")
