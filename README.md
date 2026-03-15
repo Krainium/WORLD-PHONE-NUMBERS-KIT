@@ -86,7 +86,7 @@ pip install phonenumbers tqdm pyfiglet
 python phone-kit.py
 ```
 
-That's it. The interactive menu walks you through everything.
+The interactive menu walks you through everything.
 
 ---
 
