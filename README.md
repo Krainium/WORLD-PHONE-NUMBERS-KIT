@@ -1,4 +1,4 @@
-# PhoneGen — Phone Number Generator & Validator
+# PhoneKit — Phone Number Generator & Validator
 
 A Python CLI tool that generates random phone numbers for any country, validates them using Google's `phonenumbers` library, and saves only the valid (live) numbers. Features a progress bar, multi-threaded validation, and styled terminal output.
 
@@ -83,7 +83,7 @@ pip install phonenumbers tqdm pyfiglet
 pip install phonenumbers tqdm pyfiglet
 
 # Download and run
-python phone-gen.py
+python phone-kit.py
 ```
 
 That's it. The interactive menu walks you through everything.
