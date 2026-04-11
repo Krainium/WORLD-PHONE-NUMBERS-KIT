@@ -1,6 +1,6 @@
 # PhoneKit — Phone Number Generator & Validator
 
-A Python CLI tool that generates random phone numbers for any country, validates them using Google's `phonenumbers` library, and saves only the valid (live) numbers. Features a progress bar, multi-threaded validation, and styled terminal output.
+A Python CLI tool. It generates random phone numbers for any country. It validates them with Google's `phonenumbers` library. It saves only the valid ones.
 
 Created by **Krainium**.
 
@@ -8,14 +8,13 @@ Created by **Krainium**.
 
 ## Features
 
-- **190+ countries supported** — generate numbers for any country by dialing code
-- **Validation** — checks every generated number against Google's `phonenumbers` library (the same engine behind Android's phone number handling)
-- **Multi-threaded** — validates numbers in parallel using 50 worker threads for maximum speed
-- **Progress bar** — live tqdm progress bar shows checking speed, ETA, and completion
-- **Validate existing files** — import and validate phone number lists you already have
-- **Styled output** — pyfiglet ASCII banner, color-coded results, and clean formatting
-- **Hit rate stats** — shows percentage of valid numbers found per run
-- **Works on Windows, macOS, and Linux**
+- **190+ countries** — generate numbers by dialing code
+- **Validation** — each number is checked against Google's `phonenumbers` library
+- **Multi-threaded** — 50 worker threads validate numbers in parallel
+- **Live progress bar** — shows speed, ETA, and completion
+- **Import existing files** — validate phone lists you already have
+- **Styled output** — ASCII banner, color-coded results, and hit rate stats
+- **Cross-platform** — runs on Windows, macOS, and Linux
 
 ---
 
@@ -79,14 +78,11 @@ pip install phonenumbers tqdm pyfiglet
 ## Quick Start
 
 ```bash
-# Install dependencies
 pip install phonenumbers tqdm pyfiglet
-
-# Download and run
 python phone-kit.py
 ```
 
-The interactive menu walks you through everything.
+The interactive menu handles the rest.
 
 ---
 
@@ -96,10 +92,10 @@ The interactive menu walks you through everything.
 
 #### 1) Generate & Validate
 
-Generate random phone numbers for a specific country and validate them.
+Generates random phone numbers for a country and validates them.
 
 1. Enter a country code (e.g. `+1` for USA, `+44` for UK, `+91` for India)
-2. Enter how many numbers to generate (e.g. `10000`)
+2. Enter how many numbers to generate
 3. Watch the progress bar as numbers are validated
 4. Valid numbers are saved to `Phone-numbers/{code}_valid.txt`
 5. All generated numbers are saved to `Phone-numbers/{code}_all.txt`
@@ -126,7 +122,7 @@ Generate random phone numbers for a specific country and validate them.
 
 #### 2) Validate Existing File
 
-Validate phone numbers from a text file you already have (one number per line, must include the `+` country code prefix).
+Validates phone numbers from a text file you already have. Each number must be on its own line. Each number must include the `+` country code prefix.
 
 ```
   Enter path to phone numbers file: my-numbers.txt
@@ -143,7 +139,7 @@ Validate phone numbers from a text file you already have (one number per line, m
   [+] Saved 18,420 valid numbers to Phone-numbers/my-numbers_valid.txt
 ```
 
-**Input file format** — one phone number per line with country code:
+**Input file format** — one number per line with country code:
 ```
 +14155552671
 +447911123456
@@ -153,7 +149,7 @@ Validate phone numbers from a text file you already have (one number per line, m
 
 #### 3) List Country Codes
 
-Shows all 190+ supported country codes in a two-column table:
+Shows all 190+ supported country codes in a two-column table.
 
 ```
   [Available Country Codes]
@@ -188,7 +184,7 @@ Phone-numbers/
 
 ### Output Format
 
-Each output file contains one phone number per line with the full international format:
+Each file contains one phone number per line in international format:
 
 ```
 +447911234567
@@ -201,7 +197,7 @@ Each output file contains one phone number per line with the full international 
 
 ## Supported Countries
 
-190+ countries are supported. Here are some common ones:
+190+ countries are supported. Some common ones:
 
 | Code | Country | Digits After Code |
 |------|---------|-------------------|
@@ -233,58 +229,50 @@ Use option **3** in the menu to see the full list.
 ## How It Works
 
 1. **Generation** — creates random digit sequences of the correct length for the chosen country code (e.g. 10 digits for `+1`, 9 digits for `+44`)
+2. **Validation** — Google's `phonenumbers` library checks each number for correct length, valid area/mobile prefix, and proper formatting
+3. **Multi-threading** — 50 threads validate numbers in parallel, typically hitting 3,000+ per second
+4. **Output** — valid numbers are written to file. Invalid ones are discarded. Hit rate stats are shown at the end.
 
-2. **Validation** — each number is parsed and checked by Google's `phonenumbers` library, which verifies:
-   - Correct number length for the country
-   - Valid area/mobile prefix
-   - Proper number formatting rules
+### Hit Rate
 
-3. **Multi-threading** — uses a pool of 50 threads to validate numbers in parallel, typically achieving 3,000+ validations per second
-
-4. **Output** — valid numbers are written to the output file, invalid ones are discarded. Stats are shown with the hit rate percentage
-
-### Why Random Generation?
-
-Random generation produces numbers across the entire number space for a country. The hit rate depends on the country — some countries have a small valid number space (lower hit rate), while others have a larger one (higher hit rate). Typical hit rates range from 5% to 30%.
-
-To get more valid numbers, simply generate more. For example, to get ~5,000 valid US numbers, generate around 50,000.
+Random generation covers the entire number space for a country. Hit rates vary by country. Typical rates range from 5% to 30%. To get more valid numbers, generate more. For ~5,000 valid US numbers, generate around 50,000.
 
 ---
 
 ## Tips
 
-- **Generate in bulk** — the validator is fast (3,000+ numbers/second), so don't be afraid to generate 100,000+ at once
-- **Run multiple times** — each run appends to a different file, so you can run for the same country multiple times to build a larger list
-- **Validate your own lists** — option 2 lets you clean up any phone number list you already have
-- **Numbers must include `+`** — when importing files, every number must start with `+` followed by the country code
+- The validator runs at 3,000+ numbers per second. Generating 100,000+ at once is fine.
+- Each run saves to a separate file. Run multiple times for the same country to build a larger list.
+- Option 2 cleans up any phone number list you already have.
+- Numbers in imported files must start with `+`.
 
 ---
 
 ## Troubleshooting
 
-### "Missing required package"
+### Missing required package
 
-Install all three dependencies:
 ```bash
 pip install phonenumbers tqdm pyfiglet
 ```
 
-If you're on a system with both Python 2 and 3:
+On systems with both Python 2 and 3:
+
 ```bash
 pip3 install phonenumbers tqdm pyfiglet
 ```
 
-### "Unknown country code"
+### Unknown country code
 
-Make sure you include the `+` prefix. Use option 3 to see all available codes.
+Include the `+` prefix. Use option 3 to see all available codes.
 
 ### Low hit rate
 
-This is normal for random generation. Different countries have different valid number ranges. Generate more numbers to get more valid results.
+This is normal for random generation. Hit rates vary by country. Generate more numbers to get more valid results.
 
 ### Permission errors on Windows
 
-If you get permission errors creating the `Phone-numbers` folder, run the command prompt as Administrator or use a directory you have write access to.
+Run Command Prompt as Administrator, or use a directory you have write access to.
 
 ---
 
