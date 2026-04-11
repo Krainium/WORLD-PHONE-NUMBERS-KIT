@@ -1,6 +1,6 @@
 # PhoneKit — Phone Number Generator & Validator
 
-A Python CLI tool. It generates random phone numbers for any country. It validates them with Google's `phonenumbers` library. It saves only the valid ones.
+A Python CLI tool. It generates random phone numbers for any country. It validates them with Google's `phonenumbers` library. It saves only the valid ones. Use it before running SMS or call campaigns to strip invalid numbers and cut bounce rates.
 
 Created by **Krainium**.
 
@@ -13,6 +13,7 @@ Created by **Krainium**.
 - **Multi-threaded** — 50 worker threads validate numbers in parallel
 - **Live progress bar** — shows speed, ETA, and completion
 - **Import existing files** — validate phone lists you already have
+- **Campaign-ready output** — only valid numbers are saved, cutting bounce rates before you send
 - **Styled output** — ASCII banner, color-coded results, and hit rate stats
 - **Cross-platform** — runs on Windows, macOS, and Linux
 
